@@ -1,12 +1,12 @@
 <#
 ================================================================================
- PREVENTIVE PORTAL MONITOR - DAVITA IT (v4.1 NOC Database Edition)
+ PREVENTIVE PORTAL MONITOR
  - CSV Database Storage (Auto-snapshot every 5 minutes to history.csv)
  - Persistent History: Restores counters across PC reboots/restarts
  - Outage & SLA Incident Logging (outages.log with Downtime Duration calculation)
  - Real-time Uptime SLA Percentage Column
  - Dual-Engine KeepAlive (API kernel32 + COM Fallback)
- - Brand Color Coding: DaVita Orange (DarkYellow) vs TCS Support (Cyan)
+ - Brand Color Coding:  Orange (DarkYellow) vs Support (Cyan)
  - Hotkeys: [1] Interval   [2] Edit List   [3] Force Scan   [4] Outages   [5] Open CSV
 ================================================================================
 #>
@@ -64,7 +64,7 @@ if (-not (Test-Path $configFile)) {
 
 # Inicializar archivo de log de caídas si no existe
 if (-not (Test-Path $logFile)) {
-    $initLogHeader = "# ==============================================================================`r`n# DAVITA IT - NOC INCIDENT & OUTAGE AUDIT LOG`r`n# ==============================================================================`r`n"
+    $initLogHeader = "# ==============================================================================`r`n#  IT - NOC INCIDENT & OUTAGE AUDIT LOG`r`n# ==============================================================================`r`n"
     Set-Content -Path $logFile -Value $initLogHeader -Encoding UTF8
 }
 
@@ -376,7 +376,7 @@ try {
         }
 
         Write-Host $divider -ForegroundColor Cyan
-        Write-Host "                                      PREVENTIVE PORTAL MONITOR - DAVITA IT                                      " -ForegroundColor Cyan
+        Write-Host "                                      PREVENTIVE PORTAL MONITOR -  IT                                      " -ForegroundColor Cyan
         Write-Host $divider -ForegroundColor Cyan
         Write-Host " Last Check        : $(Get-Date -Format 'yyyy-MM-dd HH:mm:ss') | Interval: $intervalSeconds sec" -ForegroundColor Gray
         Write-Host " MS Infrastructure : " -NoNewline -ForegroundColor Gray
@@ -384,8 +384,8 @@ try {
         Write-Host " Palo Alto / SASE  : " -NoNewline -ForegroundColor Gray
         Write-Host $paloHealth.Status -ForegroundColor $paloHealth.Color
         Write-Host " Portales          : " -NoNewline -ForegroundColor Gray
-        Write-Host "[*] DaVita (Naranja)   " -ForegroundColor DarkYellow -NoNewline
-        Write-Host "[*] TCS Soporte (Cyan)" -ForegroundColor Cyan
+        Write-Host "[*]  (Naranja)   " -ForegroundColor DarkYellow -NoNewline
+        Write-Host "[*] Support (Cyan)" -ForegroundColor Cyan
         Write-Host " Telemetry DB      : " -NoNewline -ForegroundColor Gray
         Write-Host $dbStatusText -ForegroundColor DarkCyan
         Write-Host " KeepAlive         : " -NoNewline -ForegroundColor Gray
@@ -414,7 +414,7 @@ try {
                 }
 
                 $portalNameColor = if ($isSupport) { "Cyan" } else { "DarkYellow" }
-                $categoryName = if ($isSupport) { "TCS Support" } else { "DaVita Core" }
+                $categoryName = if ($isSupport) { "Support" } else { " Core" }
 
                 # Asegurar inicialización independiente de cada estructura
                 if (-not $stats.ContainsKey($url)) {
